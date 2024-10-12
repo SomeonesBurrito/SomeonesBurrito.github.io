@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - La App</title>
+    <link rel="icon" type="image/x-icon" href="assets/logomini.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo"></a>
+        <a id="login">
+            <img src="assets/login icon.png" alt="Login" class="loginb" id="loginpng">
+        </a>
+        <a href="signup.html">
+            <img src="assets/signup.png" alt="Signup" class="signupb" id="signupb">
+        </a>
+        <p class="usernametxt" id="usernametxt">Username</p>
+        <div class="textbut">
+            <a href="index.html">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+            <form class="Searchbar" id="searchForm">
+                <input type="text" placeholder="Search Here..." class="placeholder" id="searchQuery" required>
+                <button type="submit" class="searchbut" id="searchcomplete">
+                    <img src="assets/mag.png" alt="Search">
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="resultsContainer"></div>
+        <p class="bio" id="biosearch">None yet.</p>
+
+        <div class="librarysearch">
+            <h2>Library</h2>
+            <table class="file-table" id="fileList">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="social">
+            <a href="#"><img src="assets/discord.png" alt="Discord"></a>
+            <a href="#"><img src="assets/insta.png" alt="Instagram"></a>
+            <a href="#"><img src="assets/phone.png" alt="Phone"></a>
+        </div>
+        <div class="ftnavbar">
+            <a href="#">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+        </div>
+        <div class="legal">
+            <a href="#"><img src="assets/copyrightfoot.png" alt="Copyright"></a>
+            <a href="policy.html">Policy</a>
+            <a href="tc.html">Terms and Conditions</a>
+        </div>
+        <a href="index.html">
+            <img src="assets/logo.png" alt="Logo" class="logoft">
+        </a>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchResult = JSON.parse(localStorage.getItem('searchResult'));
+            const username = searchResult ? searchResult.username : null;
+
+            if (username) {
+                // Fetch bio
+                fetch(`/getBio?username=${encodeURIComponent(username)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const bioElement = document.getElementById('biosearch');
+                        if (bioElement) {
+                            bioElement.textContent = data.bio || 'None yet.';
+                        } else {
+                            console.error('Bio element not found');
+                        }
+                    })
+                    .catch(error => console.error('Error fetching bio:', error));
+
+
+
+
+                // Fetch library files
+                fetch(`/listUserFiles?username=${username}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const fileListContainer = document.querySelector('#fileList tbody');
+                        fileListContainer.innerHTML = ''; // Clear previous files
+
+                        if (data.files && data.files.length > 0) {
+                            data.files.forEach(file => {
+                                const fileRow = document.createElement('tr');
+
+                                const fileNameCell = document.createElement('td');
+                                const downloadLink = document.createElement('a');
+                                downloadLink.href = `/downloadFile?username=${username}&filename=${encodeURIComponent(file.name)}`;
+                                downloadLink.textContent = file.name;
+                                downloadLink.target = '_blank'; // Opens in a new tab
+                                fileNameCell.appendChild(downloadLink);
+
+                                const fileTypeCell = document.createElement('td');
+                                fileTypeCell.textContent = file.type;
+
+                                const fileSizeCell = document.createElement('td');
+                                let sizeInKB = file.size / 1024;
+                                let displaySize = sizeInKB < 1024 ? 
+                                    `${Math.round(sizeInKB)} KB` : 
+                                    `${Math.round(sizeInKB / 1024)} MB`;
+                                fileSizeCell.textContent = displaySize;
+
+                                fileRow.appendChild(fileNameCell);
+                                fileRow.appendChild(fileTypeCell);
+                                fileRow.appendChild(fileSizeCell);
+
+                                fileListContainer.appendChild(fileRow);
+                            });
+                        } else {
+                            fileListContainer.innerHTML = '<tr><td colspan="3">No files found.</td></tr>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching library files:', error);
+                    });
+            } else {
+                console.error('No search result found in localStorage');
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

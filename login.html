@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html>
+
+    <!-- This is the title of the website that will be shown on the tiny tab -->
+    <title>Login In</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
+
+
+        
+    <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="css/login.css">
+
+
+    <!-- This is the icon from the logo being displayed beside the title -->
+    <link rel="icon" type="image/x-icon" href="assets/logomini.png">
+    
+
+
+    <!-- This sets the style sheet to the css file for dropdown -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- This is the Javascript for the dropdown button-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- This is the navbar that will be at the top of the website -->
+    <div class = navbar>
+        <a href="index.html"><img src="assets/logo.png" alt="image" class="logo"></a>
+
+        <a><img src="assets/login icon.png" alt="image" class="loginb" id="loginpng"></a>
+        
+
+        <a href="signup.html"><img src="assets/singup.png" alt="image" class="signup" id="signupb"></a>
+        <p class="usernametxt" id="usernametxt">Username</p>
+
+        <div class = textbut>
+            <a href="">Homepage</a>
+
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+            <form class="Searchbar" action="searchresult.html">
+                <input type="text" placeholder="Search Here..." class="placeholder" required>
+                <button type="submit" class="searchbut" id="searchcomplete">
+                    <img src="assets/mag.png" alt="Search">
+                </button>
+            </form>
+               
+        </div>
+    </div>
+    <div class="footer">
+        <div class="social">
+            <a href="#"><img src="assets/discord.png"></a>
+            <a href="#"><img src="assets/insta.png"></a>
+            <a href="#"><img src="assets/phone.png"></a>
+        </div>
+        <div class="ftnavbar">
+            <a href="#">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+        </div>
+        <div class="legal">
+            <a href="#"><img src="assets/copyrightfoot.png"></a>
+            <a href="policy.html">Policy</a>
+            <a href="tc.html">Terms and Conditions</a>
+        </div>
+        <a href="index.html"><img src="assets/logo.png" alt="image" class="logoft"></a>
+    </div>
+    <body>
+        <div class="login">
+            <img src="assets/bg.gif" alt="background image" class="login__bg">
+            <form class="login__form" id="loginForm">
+                <h1 class="login__title">Login</h1>
+                <div class="login__inputs">
+                    <div class="login__box">
+                        <input type="text" placeholder="Username" name="username" required class="login__input" id="username">
+                        <i class="ri-user-fill"></i>
+                    </div>
+                    <div class="login__box">
+                        <input type="password" placeholder="Password" name="password" required class="login__input" id="password_input">
+                        <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                    </div>
+                </div>
+                <p id="faillogin" class="faillogin">INCORRECT USERNAME OR PASSWORD</p>
+                <div class="login__check">
+                    <div class="login__check-box">
+                        <input type="checkbox" class="login__check-input" id="user-check">
+                        <label for="user-check" class="login__check-label">Remember me</label>
+                    </div>
+                </div>
+                <button type="submit" class="login__button">Login</button>
+                <div class="login__register">
+                    Don't have an account? <a href="signup.html">Register</a>
+                </div>
+                <div id="feedback" style="color: red; margin-top: 10px;"></div>
+            </form>
+        </div>
+    </body>
+        <!-----------------Script----------------------->
+        <script>
+            const iconEye = document.getElementById('input-icon');
+            const input = document.getElementById('password_input'); // Get the password input field
+
+            let revealing = false; // Add this variable to control the revealing process
+            iconEye.addEventListener('click', () => {
+                if (revealing) return; // Prevent clicks if revealing is in progress
+
+                let pass = input.value; // Store the current password value
+                if (input.type === 'password') {
+                    iconEye.classList.add('ri-eye-line'); // Show open eye icon
+                    iconEye.classList.remove('ri-eye-off-line'); // Hide closed eye icon
+                    if (!pass) return;
+
+                    input.type = 'text'; // Show password as plain text
+                    revealing = true; // Set flag indicating revealing process is ongoing
+
+                    pass.split('').forEach((char, index) => {
+                        setTimeout(() => {
+                            input.value = pass.slice(0, index + 1) + '●'.repeat(pass.length - index - 1);
+                            if (index === pass.length - 1) {
+                                revealing = false; // Reset flag when revealing is complete
+                            }
+                        }, 100 * index);
+                    });
+                } else {
+                    input.type = 'password'; // Hide password
+                    iconEye.classList.remove('ri-eye-line'); // Show closed eye icon
+                    iconEye.classList.add('ri-eye-off-line'); // Hide open eye icon
+                    input.value = pass; // Restore the full password when switching back
+                }
+            });
+
+            // Handle login form submission
+            document.getElementById('loginForm')?.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password_input').value;
+
+                try {
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username, password }),
+                    });
+
+                    if (response.ok) {
+                        localStorage.setItem('logedin', 'true');
+                        localStorage.setItem('username', username);
+                        window.location.href = '/profile.html'; // Redirect to profile page
+                    } else {
+                        const errorText = await response.text();
+                        faillogin.style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    alert('Login failed');
+                }
+            });
+
+        </script>
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,441 @@
+@font-face {
+  font-family: "Heading";
+  src: url("/css/Amasis/Amasis/AmasisMTW1Gotf.otf") format("opentype");
+  color:white;
+}
+
+@font-face {
+  font-family: "Classic";
+  src: url("/css/Candara-Font/Candara\ Font.ttf") format("texttype");
+  color:white;
+}
+
+@keyframes glowtext {
+  0% {
+      text-shadow: 0 0 5px #00bdd6;
+  }
+  50% {
+      text-shadow: 0 0 5px #00bdd6, 0 0 20px #00bdd6, 0 0 30px #00bdd6, 0 0 40px #00bdd6;
+  }
+  100% {
+      text-shadow: 0 0 5px #00bdd6;
+  }
+}
+
+@keyframes glowbox {
+  0% {
+      box-shadow: 0 0 5px #00bdd6;
+  }
+  50% {
+      box-shadow: 0 0 5px #00bdd6, 0 0 2px #00bdd6, 0 0 2px #00bdd6, 0 0 2px #00bdd6;
+  }
+  100% {
+      box-shadow: 0 0 5px #00bdd6;
+  }
+}
+
+body {
+/* Set the background as a gradient from #040046 to black */
+background: linear-gradient(#040046 1.5vh, black 17.5vh);
+/* Ensure the gradient covers the entire viewport */
+height: 100vh;
+background-repeat: no-repeat;
+background-color: black;
+/* Remove horizontal and vertical scroll bars */
+overflow-x: hidden;
+overflow-y: hidden;
+/* Set a fallback background color */
+}
+
+
+.navbar {
+  /* This is the background of the navbar */
+  width: 100vw;
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 5vh;
+  border:none;
+}
+
+.logo {
+  /* This makes it so the navbar is at the very top */
+  top: 0;
+  left: 0;
+  width:13vw;
+  height:zvh;
+}
+
+.loginb {
+  /* This is the position and size of the login button */
+  position: fixed;
+  top: 1.5vh;
+  right: 2vw;
+  width: 2.6vw;
+  height: 4.32vh;
+  border-radius: 100%;
+}
+
+.signupb {
+  /* This is the position and size of the sign up button */
+  position: absolute;
+  top: 1.5vh;
+  right: 5.5vw;
+  width: 4.4vw;
+  height: 4.32vh;
+  display: none;
+}
+
+.usernametxt {
+  color:white;
+  position: absolute;
+  top: 3vh;
+  right: 5.5vw;
+  font-family: "Heading", sans-serif;
+  font-size: medium;
+}
+.textbut {
+  /* This is the position and size of the text buttons and categories */
+  position: absolute;
+  top: 2.2vh; 
+  right: 54vw;
+  font-family: "Heading", sans-serif;
+  color: white;
+  font-size: 2vh;
+  display: flex;
+  align-items: center; 
+  gap: 2vw;
+  
+}
+
+.textbut a {
+  text-decoration: none;
+  color: white;
+}
+
+.textbut a:hover, .dropdown-toggle:hover {
+  text-decoration: none;
+  color: white;
+  animation: glowtext 1s infinite;
+}
+
+.dropdown-toggle {
+  text-decoration: none;
+  color: white; 
+  backdrop-filter: blur(16px);
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  font-family: "Heading", sans-serif;
+  font-size: 2vh;
+  border:none;
+}
+
+.dropdown-toggle:after {
+  content: "\25BC"; 
+}
+
+.dropdown-menu {
+  /* Ensure background color is applied */
+  background-color: transparent !important; 
+  backdrop-filter: blur(16px);
+  
+  /* This rounds the border */
+  border-radius: 10% !important;
+
+  /* This pushes it down a bit */
+  margin-top: 2vh !important;
+
+  /* Set animation for the box */
+  animation: glowbox 1s infinite;
+}
+
+.dropdown-menu li a {
+  /* Ensure the font */
+  font-family: "Heading", sans-serif;
+
+  /* Ensure the text is white */
+  color:white !important;
+}
+
+.dropdown-menu li a:hover {
+  /* Keep background color on hover */
+  border-radius: 20%;
+  background-color: transparent !important; 
+}
+
+.Searchbar {
+  position: fixed;
+  right: 13.8vw;
+
+}
+
+.placeholder {
+  border-radius: 9px;
+  background-color: transparent !important;
+  border: none;
+  border-bottom:0.5px solid grey;
+  right:7vh;
+}
+
+.placeholder:focus {
+  border: none;
+  outline: none;
+  border-bottom:0.5px solid grey;
+}
+
+input::placeholder {
+  font-family: "Heading", sans-serif;
+  color: white;
+}
+
+
+.searchbut, .searchbut img {
+  background: transparent !important;
+  border:none;
+  width:2vw;
+  height:4vh;
+  
+}
+
+.footer {
+  /* This is the background of the footer */
+  background: black;
+  width: 100vw;
+  bottom:0;
+  left: 0;
+  right:0;
+  position: absolute;
+  height: 5vh;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+.ftnavbar {
+margin-left:25vw;
+}
+
+.ftnavbar a{
+  color: white !important;
+  text-decoration: none !important;
+  padding: 0.2vw;  
+  font-family: "Heading", sans-serif;
+}
+
+.legal a{
+  color: white !important;
+  text-decoration: none !important;
+  padding: 0.2vw;  
+  font-family: "Heading", sans-serif;
+}
+
+
+.ftnavbar {
+  padding-left:10vw;
+}
+
+.legal {
+  padding-left:10vw;
+}
+
+.social {
+  margin-left:0vw;
+  bottom: 0;
+  position: absolute;
+}
+
+.ftnavbar a:hover, .legal a:hover{
+  animation: glowtext 1s infinite;
+}
+
+.social img{
+width:3.5vw;
+height:4.5vh;
+}
+
+.logoft{
+  width:9vw;
+  height:6.5vh;
+  right: 0;
+  bottom:0;
+  position: absolute;
+}
+
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+
+  /*========== Font and typography ==========*/
+  --body-font: "Poppins", sans-serif;
+  --h1-font-size: 2rem;
+  --normal-font-size: 1rem;
+  --small-font-size: .813rem;
+}
+
+/*=============== BASE ===============*/
+body,
+input,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+a {
+  text-decoration: none;
+}
+
+/*=============== SIGNUP ===============*/
+.signup {
+  position: relative;
+  height: 87vh;
+  display: grid;
+  align-items: center;
+}
+
+.signup__bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 70%;
+}
+
+.signup__form {
+  position: relative;
+  margin-inline: 1.5rem;
+  background-color: hsla(0, 0%, 100%, .01);
+  border: 2px solid hsla(0, 0%, 100%, .7);
+  padding: 2.5rem 1rem;
+  color: var(--white-color);
+  border-radius: 1rem;
+  backdrop-filter: blur(16px);
+}
+
+.signup__title {
+  text-align: center;
+  font-size: var(larger);
+  margin-bottom: 1.25rem;
+}
+
+.signup__inputs,
+.signup__box {
+  display: grid;
+}
+
+.signup__inputs {
+  row-gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.signup__box {
+  grid-template-columns: 1fr max-content;
+  column-gap: .75rem;
+  align-items: center;
+  border: 2px solid hsla(0, 0%, 100%, .7);
+  padding-inline: 1.25rem;
+  border-radius: 4rem;
+}
+
+.signup__input,
+.signup__button {
+  border: none;
+  outline: none;
+}
+
+.signup__input {
+  width: 100%;
+  background: none;
+  color: var(--white-color);
+  padding-block: 1rem;
+}
+
+.signup__input::placeholder {
+  color: var(--white-color);
+}
+
+.signup__box i {
+  font-size: 1.25rem;
+}
+
+.signup__check,
+.signup__check-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signup__check {
+  margin-bottom: 1rem;
+  font-size: var(--small-font-size);
+}
+
+.signup__check-box {
+  column-gap: .5rem;
+}
+
+.signup__check-input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--white-color);
+}
+
+.signup__check-label {
+  padding-top: 0.8vh;
+  font-family: "Heading", sans-serif !important;
+  font-size: larger;
+}
+
+.signup__button {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--white-color);
+  border-radius: 4rem;
+  color: var(--black-color);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.signup__register {
+  font-size: var(--small-font-size);
+  text-align: center;
+  font-size: smaller;
+}
+
+.signup__register a {
+  color: var(--white-color);
+  font-weight: 500;
+}
+
+.signup__register a:hover {
+  animation: glowtext 1s infinite;
+  color: white;
+  text-decoration: none;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .signup {
+    justify-content: center;
+  }
+
+  .signup__form {
+    width: 420px;
+    padding-inline: 2.5rem;
+  }
+
+  .signup__title {
+    margin-bottom: 2rem;
+  }
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - La App</title>
+    <link rel="icon" type="image/x-icon" href="assets/logomini.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html"><img src="assets/logo.png" alt="Logo" class="logo"></a>
+        <a id="login">
+            <img src="assets/login icon.png" alt="Login" class="loginb" id="loginpng">
+        </a>
+        <a href="signup.html">
+            <img src="assets/signup.png" alt="Signup" class="signupb" id="signupb">
+        </a>
+        <p class="usernametxt" id="usernametxt">Username</p>
+        <div class="textbut">
+            <a href="index.html">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+            <form class="Searchbar" id="searchForm">
+                <input type="text" placeholder="Search Here..." class="placeholder" id="searchQuery" required>
+                <button type="submit" class="searchbut" id="searchcomplete">
+                    <img src="assets/mag.png" alt="Search">
+                </button>
+            </form> 
+            
+        </div>
+    </div>
+
+    <!-- Profile Content -->
+    <div class="container">
+        <img src="assets/login icon.png" alt="Profile" class="profile" id="profilepng">
+        <input type="file" id="profileFileInput" style="display: none;" accept="image/png">
+        <input type="file" id="genericFileInput" style="display: none;">
+        <p class="usernameprofiletxt" id="usernameprofiletxt">User</p>
+        <a href="index.html" class="logout" id="logout">Sign Out</a>
+
+        <p class="bio" id="bio">None yet.</p>
+        <textarea id="bioInput" style="display:none;" class="bioinput"></textarea>
+        <button class="Edit" id="Edit">
+            <img src="assets/edit.png" alt="Edit">
+        </button>
+        <button class="Save" id="Save" style="display:none;">Save</button>
+        <button class="upload" id="upload">
+            <img src="assets/add_button.png" alt="Upload">
+        </button>
+        <div class="library">
+            <h2>Library</h2>
+
+            <table class="file-table" id="fileList">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="social">
+            <a href="#"><img src="assets/discord.png" alt="Discord"></a>
+            <a href="#"><img src="assets/insta.png" alt="Instagram"></a>
+            <a href="#"><img src="assets/phone.png" alt="Phone"></a>
+        </div>
+        <div class="ftnavbar">
+            <a href="#">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+        </div>
+        <div class="legal">
+            <a href="#"><img src="assets/copyrightfoot.png" alt="Copyright"></a>
+            <a href="policy.html">Policy</a>
+            <a href="tc.html">Terms and Conditions</a>
+        </div>
+        <a href="index.html">
+            <img src="assets/logo.png" alt="Logo" class="logoft">
+        </a>
+    </div>
+    <!-- Script -->
+    <script src="script.js"></script>
+    <script> 
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const fileListContainer = document.querySelector('#fileList tbody');
+            const libraryContainer = document.querySelector('.library'); // Select library container
+            const username = localStorage.getItem('username');
+
+            function fetchAndDisplayFiles() {
+                fetch(`/listUserFiles?username=${username}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        fileListContainer.innerHTML = '';
+
+                        if (data.files && data.files.length > 0) {
+                            data.files.forEach(file => {
+                                const fileRow = document.createElement('tr');
+
+                                const fileNameCell = document.createElement('td');
+                                const downloadLink = document.createElement('a');
+                                downloadLink.href = `/downloadFile?username=${username}&filename=${encodeURIComponent(file.name)}`;
+                                downloadLink.textContent = file.name;
+                                downloadLink.classList.add('file-link');
+                                downloadLink.target = '_blank'; // Opens in a new tab
+                                fileNameCell.appendChild(downloadLink);
+
+                                const fileTypeCell = document.createElement('td');
+                                fileTypeCell.textContent = file.type;
+
+                                const fileSizeCell = document.createElement('td');
+                                let sizeInKB = file.size / 1024;
+                                let displaySize;
+
+                                if (sizeInKB < 1024) {
+                                    displaySize = `${Math.round(sizeInKB)} KB`;
+                                } else if (sizeInKB < 1024 * 1024) {
+                                    displaySize = `${Math.round(sizeInKB / 1024)} MB`;
+                                } else {
+                                    displaySize = `${Math.round(sizeInKB / (1024 * 1024))} GB`;
+                                }
+
+                                fileSizeCell.textContent = displaySize;
+
+                                const fileRemoveCell = document.createElement('td');
+                                const removeButton = document.createElement('button');
+                                removeButton.textContent = 'Remove';
+                                removeButton.classList.add('btn', 'btn-danger');
+                                removeButton.addEventListener('click', function() {
+                                    deleteUserFile(file.name);
+                                });
+                                fileRemoveCell.appendChild(removeButton);
+
+                                fileRow.appendChild(fileNameCell);
+                                fileRow.appendChild(fileTypeCell);
+                                fileRow.appendChild(fileSizeCell);
+                                fileRow.appendChild(fileRemoveCell);
+
+                                fileListContainer.appendChild(fileRow);
+                            });
+
+                            // Toggle scrollable class based on file count
+                            if (data.files.length >= 8) {
+                                libraryContainer.classList.add('scrollable');
+                            } else {
+                                libraryContainer.classList.remove('scrollable');
+                            }
+                        } else {
+                            fileListContainer.innerHTML = '<tr><td colspan="5">No files found.</td></tr>';
+                            libraryContainer.classList.remove('scrollable');
+                        }
+                    })
+                    .catch(error => console.error('Error fetching file list:', error));
+            }
+
+            fetchAndDisplayFiles();
+            setInterval(fetchAndDisplayFiles, 10000);
+
+            function deleteUserFile(fileName) {
+                fetch('/deleteUserFile', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, fileName })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        console.log('File deleted successfully');
+                        fetchAndDisplayFiles(); // Reload the files after deletion
+                    } else {
+                        console.error('Error deleting file:', result.message);
+                    }
+                })
+                .catch(error => console.error('Error deleting file:', error));
+            }
+        });
+
+    </script>
+</body>
+
+</html>

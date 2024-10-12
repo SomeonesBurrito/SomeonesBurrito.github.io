@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+
+    <!-- This is the title of the website that will be shown on the tiny tab -->
+    <title>La App</title>
+
+    <!-- This is the icon from the logo being displayed beside the title -->
+    <link rel="icon" type="image/x-icon" href="assets/logomini.png">
+    
+    <!-- This sets the style sheet to the css file called style -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- This sets the style sheet to the css file for dropdown -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- This is the Javascript for the dropdown button-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <!-- This is the navbar that will be at the top of the website -->
+    <div class="navbar">
+        <a href="index.html"><img src="assets/logo.png" alt="image" class="logo"></a>
+    
+        <a id="login">
+            <img src="assets/login%20icon.png" alt="Login" class="loginb" id="loginpng">
+
+        </a>
+        
+        <a href="signup.html"><img src="assets/singup.png" alt="image" class="signup" id="signupb"></a>
+        <p class="usernametxt" id="usernametxt">Username</p>
+    
+        <div class="textbut">
+            <a href="">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+            <form class="Searchbar" id="searchForm">
+                <input type="text" placeholder="Search Here..." class="placeholder" id="searchQuery" required>
+                <button type="submit" class="searchbut" id="searchcomplete">
+                    <img src="assets/mag.png" alt="Search">
+                </button>
+            </form>            
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="social">
+            <a href="#"><img src="assets/discord.png" alt="Discord"></a>
+            <a href="#"><img src="assets/insta.png" alt="Instagram"></a>
+            <a href="#"><img src="assets/phone.png" alt="Phone"></a>
+        </div>
+        <div class="ftnavbar">
+            <a href="#">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+        </div>
+        <div class="legal">
+            <a href="#"><img src="assets/copyrightfoot.png"></a>
+            <a href="policy.html">Policy</a>
+            <a href="tc.html">Terms and Conditions</a>
+        </div>
+        <a href="index.html"><img src="assets/logo.png" alt="image" class="logoft"></a>
+    </div>
+    <body style="overflow-x:hidden">
+        <div class = infoplace>
+            <div class="infocircle">
+                <h2>The Best Apps <br> In One Place</h2>
+                <p>Join our very welcoming community. Once you join feel free to upload projects old and new!</p>
+            </div>
+            <div class="side_images"> 
+                <img src="assets/left.png">
+                <img src="assets/center.png">
+                <img src="assets/right.png">
+                <img src="assets/coding3.jpeg">
+                <img src="assets/coding4.jpeg">
+                <img src="assets/coding2.jpeg">
+                <img src="assets/coding1.jpeg">
+                <img src="assets/coding5.jpeg">
+            </div>
+        </div>
+        <div class="recomended">
+            <div class="recomendedapps1">
+                <img src="myproject/Website/profiles/Eugene.png">
+                <button id="downloadBtn1" class="downloadBtn downloadBtn1"><img src="assets/fileicon.png"></button>
+            </div>
+            <div class="recomendedapps2">
+                <img src="myproject/Website/profiles/Eugene.png">
+                <button id="downloadBtn2" class="downloadBtn downloadBtn2"><img src="assets/fileicon.png"></button>
+            </div>
+            <div class="recomendedapps3">
+                <img src="myproject/Website/profiles/test.png">
+                <button id="downloadBtn3" class="downloadBtn downloadBtn3"><img src="assets/fileicon.png"></button>
+            </div>
+            <div class="recomendedapps4">
+                <img src="myproject/Website/profiles/test.png">
+                <button id="downloadBtn4" class="downloadBtn downloadBtn4"><img src="assets/fileicon.png"></button>
+            </div>
+        </div>
+             
+            
+        </div>
+    </body>
+    <!-----------------Script----------------------->
+        <script src="script.js"></script>
+        <script>
+            document.getElementById('downloadBtn1').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = 'myproject/Website/profiles/Eugene/11088_Ed Sheeran - Shape of You SHOW2BABI.COM.mp3'; 
+                link.download = 'Shape of you'; 
+                link.click();
+            });
+
+            document.getElementById('downloadBtn2').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = 'myproject/Website/profiles/Eugene/articulating-toothless-toy-repaired V2.3mf'; 
+                link.download = 'Dragon 3d Print'; 
+                link.click();
+            });
+
+            document.getElementById('downloadBtn3').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = 'myproject/Website/profiles/test/cool croc'; 
+                link.download = 'Cool Croc'; 
+                link.click();
+            });
+
+            document.getElementById('downloadBtn4').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = 'myproject/Website/profiles/test/Conductivity, pH and Salts - Copy - Copy.pptx'; 
+                link.download = 'Chemistry'; 
+                link.click();
+            });
+        </script>
+</html>

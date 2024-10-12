@@ -1,0 +1,728 @@
+@font-face {
+    font-family: "Heading";
+    src: url("/css/Amasis/Amasis/AmasisMTW1Gotf.otf") format("opentype");
+    color:white;
+}
+
+@font-face {
+    font-family: "Classic";
+    src: url("/css/Candara-Font/Candara\ Font.ttf") format("texttype");
+    color:white;
+}
+
+@keyframes glowtext {
+    0% {
+        text-shadow: 0 0 5px #00bdd6;
+    }
+    50% {
+        text-shadow: 0 0 5px #00bdd6, 0 0 20px #00bdd6, 0 0 30px #00bdd6, 0 0 40px #00bdd6;
+    }
+    100% {
+        text-shadow: 0 0 5px #00bdd6;
+    }
+}
+
+@keyframes glowbox {
+    0% {
+        box-shadow: 0 0 5px #00bdd6;
+    }
+    50% {
+        box-shadow: 0 0 5px #00bdd6, 0 0 2px #00bdd6, 0 0 2px #00bdd6, 0 0 2px #00bdd6;
+    }
+    100% {
+        box-shadow: 0 0 5px #00bdd6;
+    }
+}
+
+body {
+  /* Set the background as a gradient from #040046 to black */
+  background: linear-gradient(#040046 1.5vh, black 17.5vh);
+  /* Ensure the gradient covers the entire viewport */
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-color: black;
+
+  /* Set a fallback background color */
+}
+
+
+.navbar {
+    /* This is the background of the navbar */
+    width: 100vw;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 5vh;
+    border:none;
+}
+
+.logo {
+    /* This makes it so the navbar is at the very top */
+    top: 0;
+    left: 0;
+    width:13vw;
+    height:zvh;
+}
+
+.loginb {
+    /* This is the position and size of the login button */
+    position: fixed;
+    top: 1.5vh;
+    right: 2vw;
+    width: 2.6vw;
+    height: 4.32vh;
+    border-radius: 100%;
+}
+
+.signup {
+    /* This is the position and size of the sign up button */
+    position: absolute;
+    top: 1.5vh;
+    right: 5.5vw;
+    width: 4.4vw;
+    height: 4.32vh;
+    display: none;
+}
+  
+.signupb {
+    /* This is the position and size of the sign up button */
+    position: absolute;
+    top: 1.5vh;
+    right: 5.5vw;
+    width: 4.4vw;
+    height: 4.32vh;
+    display: none;
+}
+
+.usernametxt {
+    color:white;
+    position: absolute;
+    top: 3vh;
+    right: 5.5vw;
+    font-family: "Heading", sans-serif;
+    font-size: medium;
+}
+
+.textbut {
+    /* This is the position and size of the text buttons and categories */
+    position: absolute;
+    top: 2.2vh; 
+    right: 54vw;
+    font-family: "Heading", sans-serif;
+    color: white;
+    font-size: 2vh;
+    display: flex;
+    align-items: center; 
+    gap: 2vw;
+    
+}
+
+.textbut a {
+    text-decoration: none;
+    color: white;
+}
+
+.textbut a:hover, .dropdown-toggle:hover {
+    text-decoration: none;
+    color: white;
+    animation: glowtext 1s infinite;
+}
+
+
+
+.Searchbar {
+    position: fixed;
+    right: 13.8vw;
+
+}
+
+.placeholder {
+    border-radius: 9px;
+    background-color: transparent !important;
+    border: none;
+    border-bottom:0.5px solid grey;
+    right:7vh;
+}
+
+.placeholder:focus {
+    border: none;
+    outline: none;
+    border-bottom:0.5px solid grey;
+}
+
+input::placeholder {
+    font-family: "Heading", sans-serif;
+    color: white;
+}
+  
+
+.searchbut, .searchbut img {
+    background: transparent !important;
+    border:none;
+    width:2vw;
+    height:4vh;
+    
+}
+
+.infocircle {
+    position: absolute;
+    top: 12vh;
+    left: 2vw;
+    width: 15vw;
+    height: 29vh;
+    background: #DEE1E6FF;
+    border-radius: 50%;
+    
+}
+
+.infocircle h2{
+    font-family: "Heading", sans-serif;
+    color:black;
+    font-size:150%;
+    padding-left: 3vw;
+    padding-top: 2vh
+}
+
+.infocircle p{
+    font-family: "Classic", sans-serif;
+    color:black;
+    padding-left: 1.5vw;
+}
+
+.side_images {
+    padding-top:5vh;
+    padding-left: 30vw;
+    gap: 0;
+    justify-content: center;
+    display: flex;
+}
+
+.side_images img{
+    width: 10vw;
+    height:35vh;
+    transform: skew(-20deg);     
+}
+
+.footer {
+    /* This is the background of the footer */
+    background: black;
+    width: 100vw;
+    bottom:1.5vh;
+    left: 0;
+    right:0;
+    position: absolute;
+    height: 5vh;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+.ftnavbar {
+  margin-left:25vw;
+}
+
+.ftnavbar a{
+    color: white !important;
+    text-decoration: none !important;
+    padding: 0.2vw;  
+    font-family: "Heading", sans-serif;
+}
+
+.legal a{
+    color: white !important;
+    text-decoration: none !important;
+    padding: 0.2vw;  
+    font-family: "Heading", sans-serif;
+    
+}
+
+
+.ftnavbar {
+    padding-left:10vw;
+}
+
+.legal {
+    padding-left:10vw;
+}
+
+.social {
+    margin-left:0vw;
+    bottom: 0;
+    position: absolute;
+}
+
+.ftnavbar a:hover, .legal a:hover{
+    animation: glowtext 1s infinite;
+}
+
+.social img{
+  width:3.5vw;
+  height:4.5vh;
+}
+
+.logoft{
+    width:13vw;
+    height:zvh;
+    right: 0;
+    bottom: 0;
+    position: absolute
+}
+
+.container {
+    top:12vh;
+    left: 18vw;
+    background-color: rgb(41, 40, 40);
+    width:40vw;
+    height:78vh;
+    border-radius: 10%;
+    position: fixed;
+    color:white;
+}
+
+.usernameprofiletxt { 
+    font-family: "Heading", sans-serif;
+    color: white;
+    font-size: 500%;
+    margin-left: 12vw;
+    top: 7vh;
+    position: absolute;
+}
+
+.profile {
+    position: absolute;
+    left: auto;
+    top: 3vh;
+    width: 11vw;
+    height: 18vh;
+    border-radius: 100%;
+}
+
+.logout {
+    position: absolute;
+    margin-left: 88%;
+    top: 3vh;
+    width: 13vw;
+    height: 18vh;
+    font-family: "Heading";
+    color: white;
+    font-size: 150%;
+    text-decoration: none;
+}
+
+.logout:hover {
+    animation: glowtext 1s infinite;
+    text-decoration: none;
+    color:white;
+}
+
+.bio {
+    color:white;
+    font-family: "Heading";
+    font-size: 150%;
+    margin-left: 2vw;
+    top: 25vh;
+    width: 20vw;
+    height:18vh;
+    position: absolute;
+}
+
+.Save {
+    border-radius: 25%;
+    background-color: #00bdd6;
+    width:auto;
+    height: 4vh;
+    font-family: "Heading";
+    color: white;
+    font-size: 150%;
+    text-decoration: none;
+    top: 40vh;
+    left: 20vw;
+    position: absolute;
+}
+
+.Edit {
+    border-radius: 25%;
+    background-color: transparent;
+    border:none;
+    margin-left:20vw;
+    margin-top:23vh;
+    position: absolute;
+}    
+.Edit img{
+    width:4vw;
+    height: 4vh;
+
+}
+
+.bioinput {
+    color:white;
+    background-color: transparent;
+    animation: glowbox 1s infinite;
+    border-radius: 5%;
+    font-family: "Heading";
+    font-size: 150%;
+    margin-left: 2vw;
+    top: 25vh;
+    position: absolute;
+    overflow-y: hidden;
+    width:20vw;
+    height:18vh;
+}
+
+.upload {
+    border-radius: 25%;
+    background-color: transparent;
+    border:none;
+    margin-left:87.3%;
+    margin-top:24.8%;
+    z-index: 20;
+    position: absolute;
+    scale: 80%;
+}
+
+
+.library {
+    margin-left:50%;
+    margin-top: 32vh;
+    color: white;
+    width: 50%;
+    max-width: 44vw;
+    max-height: calc(44vh - 50px); /* Subtract the height of the h2 from the max-height */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow the library to take up remaining space */
+}
+
+.library.scrollable {
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.library h2 {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgb(41, 40, 40);
+    text-align: left;
+    color: white;
+    margin: 0;
+    padding: 10px;
+}
+
+.library::-webkit-scrollbar {
+    width: 12px; /* Adjust scrollbar width */
+}
+
+.library::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.library::-webkit-scrollbar-track {
+    background: #2c3e50;
+    border-radius: 10px;
+}
+
+.file-table {
+    width: 100%;
+    border-collapse: collapse;
+    flex-grow: 1; 
+}
+
+.file-table th, .file-table td {
+    border: 1px solid #00bdd6;
+    padding: 8px;
+}
+
+.file-table th {
+    position: sticky;
+    color:white;
+    text-decoration: none;
+    top: 5vh;
+    z-index: 10;    
+    background-color: #00bdd6;
+    text-align: center;
+}
+
+.file-table a {
+
+    color:white;
+    text-decoration: none;
+}
+
+
+.file-table td {
+    margin-top: auto;
+}
+
+.file-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.file-link {
+    color: white;
+    text-decoration: none;
+}
+
+.file-link:hover {
+    text-decoration: underline;
+}
+
+.container h1{
+    padding-top:2%;
+}
+
+.form-control {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    
+}
+
+.form-group textarea, .form-group input {
+    background-color: black;
+    color: white;
+    animation: glowbox 1s infinite;
+}
+
+.form-group label {
+    font-family: "Heading";
+}
+
+.sentence {
+    font-size: large;
+}
+
+.submit_report {
+    border-radius: 25%;
+    background-color: #00bdd6;
+    width:auto;
+    height: 4vh;
+    font-family: "Heading";
+    color: white;
+    font-size: 150%;
+    text-decoration: none;
+    top: 70%;
+    left: 30%;
+    width: 40%;
+    height:5%;
+    position: absolute;
+    animation: glowbox 1s infinite;
+}
+
+.containerd strong{
+    font-family: "Heading";
+}
+
+.container a {
+    text-decoration: underline;
+}
+
+.help, ul {
+    text-align: center;
+    padding:2%;
+    list-style: none;
+    color:white;
+}
+
+.help a{
+    color:white;
+}
+
+.help a:hover{
+    animation: glowtext 1s infinite;
+    color:white;
+}
+
+.profile-result {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    font-size: 500%;
+}
+
+.profile-result p {
+    margin-left: 13vw;
+    top: 5vh;
+    position: absolute;
+}
+
+.profile-result p:hover {
+    animation: glowtext 1s infinite;
+}
+
+.profile-img {
+    width:12vw;
+    height: 19vh;
+    border-radius: 100%;
+}
+
+.librarysearch {
+    margin-left:50%;
+    margin-top: 4vh;
+    color: white;
+    width: 50%;
+    max-width: 44vw;
+    max-height: calc(44vh - 50px); /* Subtract the height of the h2 from the max-height */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow the library to take up remaining space */
+}
+
+.librarysearch.scrollable {
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.librarysearch h2 {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: rgb(41, 40, 40);
+    text-align: left;
+    color: white;
+    margin: 0;
+    padding: 10px;
+}
+
+.librarysearch::-webkit-scrollbar {
+    width: 12px; /* Adjust scrollbar width */
+}
+
+.librarysearch::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.librarysearch::-webkit-scrollbar-track {
+    background: #2c3e50;
+    border-radius: 10px;
+}
+
+.policytc_container {
+    padding-top: 2vh;
+    max-height: 66vh;
+    overflow-y: scroll;
+}
+
+.policytc_h {
+    top: 0;
+    position: sticky;
+    z-index: 100; /* Ensures it stays above content */
+    text-align: center;
+    padding-top: 3vh;
+    font-size: 200%;
+    border-radius: 10%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.policytc {
+    font-size: 102%;
+}
+
+.ptcend {
+    padding-top: 3vh;
+    font-size: 105%;
+    margin-left: 27%;
+}
+
+.policytc_container::-webkit-scrollbar {
+    width: 12px; /* Adjust scrollbar width */
+}
+
+
+.policytc_container::-webkit-scrollbar-thumb {
+    background: #00bdd6;
+    border-radius: 10px;
+}
+
+
+.policytc_container::-webkit-scrollbar-track {
+    background: #2c3e50;
+    border-radius: 10px;
+}
+
+
+.recomendedapps1, .recomendedapps2, .recomendedapps3, .recomendedapps4 {
+    margin-top: 12vh;
+    width: fit-content;
+    background-color: rgb(41, 40, 40);
+    border-radius: 20%;
+    overflow: hidden;
+    position: absolute;
+    display: flex;
+    align-items: center; 
+}
+
+
+
+.recomendedapps1 { margin-left: 11vw; }
+.recomendedapps2 { margin-left: 31vw; }
+.recomendedapps3 { margin-left: 51vw; }
+.recomendedapps4 { margin-left: 71vw; }
+
+.downloadBtn {
+    background: none;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+
+.downloadBtn img {
+    display: block;
+}
+
+.downloadBtn:hover img {
+    filter: brightness(0.5);
+}
+
+.downloadBtn1:hover::after,
+.downloadBtn2:hover::after,
+.downloadBtn3:hover::after,
+.downloadBtn4:hover::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.downloadBtn1:hover::after {
+    content: "Shape Of You";
+}
+
+.downloadBtn2:hover::after {
+    content: "Dragon 3d Print";
+}
+
+.downloadBtn3:hover::after {
+    content: "Cool Croc";
+}
+
+.downloadBtn4:hover::after {
+    content: "Chemistry";
+}
+
+.recomended img {
+    width: 9vw;
+    height: 14vh;
+    border-radius: 100%;
+}
+
+.recomended button {
+    width: 9vw;
+    height: 14vh;
+    border-radius: 100%;
+}
+

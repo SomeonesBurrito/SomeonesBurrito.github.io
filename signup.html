@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="assets/logomini.png">
+    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="index.html"><img src="assets/logo.png" alt="image" class="logo"></a>
+        <a><img src="assets/login icon.png" alt="image" class="loginb" id="loginpng"></a>
+        <a href="signup.html"><img src="assets/singup.png" alt="image" class="signupb" id="signupb"></a>
+        <p class="usernametxt" id="usernametxt">Username</p>
+        <div class="textbut">
+            <a href="#">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+            <form class="Searchbar" action="searchresult.html">
+                <input type="text" placeholder="Search Here..." class="placeholder" required>
+                <button type="submit" class="searchbut" id="searchcomplete">
+                    <img src="assets/mag.png" alt="Search">
+                </button>
+            </form>
+              
+        </div>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="signup">
+        <img src="assets/bg.gif" alt="image" class="signup__bg">
+        <form id="signupForm" class="signup__form">
+            <h1 class="signup__title">Register</h1>
+            <div class="signup__inputs">
+                <div class="signup__box">
+                    <input type="text" placeholder="Username" required class="signup__input" id="regUsername" pattern="^\S*$">
+                    <i class="ri-user-fill"></i>
+                </div>
+                <div class="signup__box">
+                    <input type="password" placeholder="Password" required class="signup__input" id="password_input">
+                    <i class="ri-eye-off-line login__eye" id="input-icon"></i>
+                </div>
+            </div>
+            <button type="submit" class="signup__button">Register</button>
+            <div class="signup__register">
+                Do you have an account? <a href="login.html">Login</a>
+            </div>
+        </form>      
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="social">
+            <a href="#"><img src="assets/discord.png"></a>
+            <a href="#"><img src="assets/insta.png"></a>
+            <a href="#"><img src="assets/phone.png"></a>
+        </div>
+        <div class="ftnavbar">
+            <a href="#">Homepage</a>
+            <a href="contact.html">Contact</a>
+            <a href="help.html">Help</a>
+        </div>
+        <div class="legal">
+            <a href="#"><img src="assets/copyrightfoot.png"></a>
+            <a href="policy.html">Policy</a>
+            <a href="tc.html">Terms and Conditions</a>
+        </div>
+        <a href="index.html"><img src="assets/logo.png" alt="image" class="logoft"></a>
+    </div>
+
+    <!-- Script -->
+    <script>
+        const input = document.getElementById('password_input');
+        const iconEye = document.getElementById('input-icon');
+        let pass = '';
+        let revealing = false; // Flag to track if revealing is in progress
+
+        iconEye.addEventListener('click', () => {
+            if (revealing) return; // Prevent clicks if revealing is in progress
+
+            pass = input.value;
+            if (input.type === 'password') {
+                iconEye.classList.add('ri-eye-line');
+                iconEye.classList.remove('ri-eye-off-line');
+                if (!pass) return;
+
+                input.type = 'text';
+                revealing = true; // Set flag to true indicating revealing process is ongoing
+
+                pass.split('').forEach((char, index) => {
+                    setTimeout(() => {
+                        input.value = pass.slice(0, index + 1) + '●'.repeat(pass.length - index - 1);
+                        if (index === pass.length - 1) {
+                            revealing = false; // Reset flag when revealing is complete
+                        }
+                    }, 100 * index);
+                });
+            } else {
+                input.type = 'password';
+                iconEye.classList.remove('ri-eye-line');
+                iconEye.classList.add('ri-eye-off-line');
+                input.value = pass; // Restore the full password when switching back to password type
+            }
+        });    
+            // Handle signup form submission
+        document.getElementById('signupForm')?.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('regUsername').value;
+        const password = document.getElementById('password_input').value;
+
+        try {
+            const response = await fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const result = await response.text();
+                window.location.href = '/index.html'; 
+                logedin = localStorage.getItem('logedin') === 'true';
+            } else {
+                const errorText = await response.text();
+                console.error('Server response:', errorText);
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+        });
+        iconEye.addEventListener('click', () => {
+        if (revealing) return; // Prevent clicks if revealing is in progress
+
+        pass = input.value;
+        if (input.type === 'password') {
+            iconEye.classList.add('ri-eye-line');
+            iconEye.classList.remove('ri-eye-off-line');
+            if (!pass) return;
+
+            input.type = 'text';
+            revealing = true; // Set flag to true indicating revealing process is ongoing
+
+            pass.split('').forEach((char, index) => {
+                setTimeout(() => {
+                    input.value = pass.slice(0, index + 1) + '●'.repeat(pass.length - index - 1);
+                    if (index === pass.length - 1) {
+                        revealing = false; // Reset flag when revealing is complete
+                    }
+                }, 100 * index);
+            });
+        } else {
+            input.type = 'password';
+            iconEye.classList.remove('ri-eye-line');
+            iconEye.classList.add('ri-eye-off-line');
+            input.value = pass; // Restore the full password when switching back to password type
+        }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
